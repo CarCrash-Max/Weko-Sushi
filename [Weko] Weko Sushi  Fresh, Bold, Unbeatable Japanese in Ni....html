@@ -25,7 +25,7 @@
             cursor: none;
         }
 
-        .font-poppins { font-family: `Poppins`, sans-serif; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
 
         /* Custom Cursor */
         #custom-cursor {
@@ -56,7 +56,7 @@
         .film-grain {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url(`https://www.transparenttextures.com/patterns/stardust.png`);
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
             opacity: 0.05;
             pointer-events: none;
             z-index: 9998;
@@ -83,7 +83,7 @@
         }
 
         .hero-main {
-            background-image: linear-gradient(to bottom, rgba(32,32,32,0.4), var(--sumi-black)), url(`https://img1.wsimg.com/isteam/ip/b4fd9c7f-4fc0-4a97-8437-fa6b26eaa4de/DSC04031.jpg`);
+            background-image: linear-gradient(to bottom, rgba(32,32,32,0.4), var(--sumi-black)), url('https://img1.wsimg.com/isteam/ip/b4fd9c7f-4fc0-4a97-8437-fa6b26eaa4de/DSC04031.jpg');
             z-index: 2;
         }
 
@@ -137,35 +137,6 @@
             line-height: 0.9;
         }
 
-        .kuse-branding {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: white;
-            font-size: 0.8rem;
-            text-decoration: none;
-            z-index: 10001;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-            background: rgba(32, 32, 32, 0.6);
-            padding: 8px 12px;
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
-        }
-
-        .kuse-branding:hover {
-            opacity: 1;
-            color: var(--primary-red);
-            transform: translateY(-2px);
-        }
-
-        .kuse-branding svg {
-            height: 1.2em;
-        }
-
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -183,6 +154,27 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--sumi-black); }
         ::-webkit-scrollbar-thumb { background: var(--primary-red); border-radius: 10px; }
+
+        .menu-category {
+            border-left: 3px solid var(--primary-red);
+            padding-left: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .menu-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+        .menu-item-name {
+            font-weight: 500;
+        }
+        .menu-item-price {
+            font-weight: 600;
+            color: var(--primary-red);
+        }
     </style>
 </head>
 <body class="font-poppins">
@@ -200,7 +192,7 @@
         </div>
         <div class="hidden md:flex gap-10 text-sm font-medium tracking-widest text-white uppercase">
             <a href="#about" class="hover:text-red-500 transition-colors">History</a>
-            <a href="#menu" class="hover:text-red-500 transition-colors">Masterpieces</a>
+            <a href="#full-menu" class="hover:text-red-500 transition-colors">Menu</a>
             <a href="#ayce" class="hover:text-red-500 transition-colors">AYCE</a>
             <a href="#contact" class="hover:text-red-500 transition-colors">Contact</a>
         </div>
@@ -264,10 +256,9 @@
         </div>
     </section>
 
-    <!-- Horizontal Masterpieces -->
+    <!-- Horizontal Masterpieces (Signature Rolls) -->
     <section class="horizontal-scroll-section overflow-hidden bg-[#202020]">
         <div class="horizontal-scroll-container">
-            <!-- Item 1 -->
             <div class="scroll-item">
                 <div class="grid md:grid-cols-2 gap-12 items-center w-full max-w-7xl">
                     <img src="https://img1.wsimg.com/isteam/ip/b4fd9c7f-4fc0-4a97-8437-fa6b26eaa4de/DSC04031.jpg" class="rounded-2xl h-[60vh] object-cover" alt="Signature Weko Roll">
@@ -279,7 +270,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Item 2 -->
             <div class="scroll-item">
                 <div class="grid md:grid-cols-2 gap-12 items-center w-full max-w-7xl">
                     <div>
@@ -295,7 +285,6 @@
                     <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=3819379298391966" class="rounded-2xl h-[60vh] object-cover" alt="Weko Dragon Rolls">
                 </div>
             </div>
-            <!-- Item 3 -->
             <div class="scroll-item bg-[#E11D48]">
                 <div class="text-center">
                     <h3 class="text-8xl md:text-9xl font-black tracking-tighter mb-8">TASTE THE<br>DIFFERENCE</h3>
@@ -306,139 +295,294 @@
         </div>
     </section>
 
-    <!-- Menu Section -->
-    <section class="py-32 px-8 bg-white text-[#202020]" id="menu">
+    <!-- FULL MENU SECTION (All items) -->
+    <section class="py-32 px-8 bg-white text-[#202020]" id="full-menu">
         <div class="max-w-7xl mx-auto">
-            <div class="flex justify-between items-end mb-16 reveal-up">
-                <div>
-                    <h2 class="text-6xl font-black uppercase tracking-tighter">The <span class="text-[#E11D48]">Vault</span></h2>
-                    <p class="text-gray-500 font-medium uppercase tracking-widest mt-2">Curated selections for the bold</p>
-                </div>
-                <div class="hidden md:block h-[1px] flex-1 mx-12 bg-gray-200"></div>
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="text-6xl font-black uppercase tracking-tighter">The <span class="text-[#E11D48]">Complete</span> Menu</h2>
+                <p class="text-gray-500 font-medium uppercase tracking-widest mt-2">Every dish, every price – fresh to order</p>
             </div>
 
-            <div class="grid lg:grid-cols-3 gap-16">
-                <!-- Column 1: Starters -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
+                <!-- APPETIZERS -->
                 <div class="reveal-up">
-                    <h3 class="text-2xl font-bold mb-8 border-b-2 border-[#E11D48] pb-2 inline-block">Appetizers</h3>
-                    <div class="space-y-6">
-                        <div class="flex justify-between items-center group">
-                            <div>
-                                <p class="font-bold group-hover:text-[#E11D48] transition-colors">Beef Short Ribs (8pcs)</p>
-                                <p class="text-xs text-gray-400 uppercase">Grilled to perfection</p>
-                            </div>
-                            <span class="font-bold">$15</span>
-                        </div>
-                        <div class="flex justify-between items-center group">
-                            <div>
-                                <p class="font-bold group-hover:text-[#E11D48] transition-colors">Rock Shrimp</p>
-                                <p class="text-xs text-gray-400 uppercase">Crispy, spicy glaze</p>
-                            </div>
-                            <span class="font-bold">$15</span>
-                        </div>
-                        <div class="flex justify-between items-center group">
-                            <div>
-                                <p class="font-bold group-hover:text-[#E11D48] transition-colors">Soft Shell Crab</p>
-                                <p class="text-xs text-gray-400 uppercase">Signature deep fry</p>
-                            </div>
-                            <span class="font-bold">$14</span>
-                        </div>
-                        <div class="flex justify-between items-center group">
-                            <div>
-                                <p class="font-bold group-hover:text-[#E11D48] transition-colors">Salmon Teriyaki</p>
-                                <p class="text-xs text-gray-400 uppercase">Fresh Atlantic Salmon</p>
-                            </div>
-                            <span class="font-bold">$13</span>
-                        </div>
+                    <h3 class="text-2xl font-bold border-l-4 border-[#E11D48] pl-3 mb-4">Appetizers</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">Deep fried tofu (6pcs)</span><span class="menu-item-price">$6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Japanese chicken cutlet</span><span class="menu-item-price">$11</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Chicken wings (8pcs)</span><span class="menu-item-price">$10</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Beef short ribs (8pcs)</span><span class="menu-item-price">$15</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Shrimp tempura (6pcs)</span><span class="menu-item-price">$9</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Vegetable tempura (yam/crab/mushroom/zucchini/broccoli/eggplant/pumpkin)</span><span class="menu-item-price">$9</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Squid tempura (12pcs)</span><span class="menu-item-price">$11</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Fried calamari ring (10pcs)</span><span class="menu-item-price">$10</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Baby mushroom beef roll (6pcs)</span><span class="menu-item-price">$9</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Soft shell crab</span><span class="menu-item-price">$14</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Salmon teriyaki</span><span class="menu-item-price">$13</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Beef teriyaki</span><span class="menu-item-price">$12</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Chicken teriyaki</span><span class="menu-item-price">$11</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Black pepper shrimp</span><span class="menu-item-price">$13</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Rock shrimp</span><span class="menu-item-price">$15</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Coconut shrimp</span><span class="menu-item-price">$13</span></div>
                     </div>
                 </div>
 
-                <!-- Column 2: Sushi & Sashimi -->
-                <div class="reveal-up" style="transition-delay: 0.1s;">
-                    <h3 class="text-2xl font-bold mb-8 border-b-2 border-[#E11D48] pb-2 inline-block">Nigiri & Sashimi</h3>
-                    <div class="space-y-6">
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Salmon (N/S)</p>
-                            <span class="font-bold text-[#E11D48]">$6 / $6</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Red Tuna (N/S)</p>
-                            <span class="font-bold text-[#E11D48]">$7 / $7.5</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">White Tuna (N/S)</p>
-                            <span class="font-bold text-[#E11D48]">$6 / $6.5</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-bold">Unagi (N/S)</p>
-                            <span class="font-bold text-[#E11D48]">$6 / $8</span>
-                        </div>
-                        <div class="mt-8 p-6 bg-gray-900 text-white rounded-xl">
-                            <p class="text-xs tracking-widest uppercase mb-2">Freshness Guarantee</p>
-                            <p class="text-sm italic">All Sashimi is 3pcs, Nigiri 2pcs per order.</p>
-                        </div>
+                <!-- SOUP & SALAD -->
+                <div class="reveal-up">
+                    <h3 class="text-2xl font-bold border-l-4 border-[#E11D48] pl-3 mb-4">Soup & Salad</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">Miso soup</span><span class="menu-item-price">$4</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Hot & sour soup</span><span class="menu-item-price">$5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Edamame</span><span class="menu-item-price">$6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Green salad</span><span class="menu-item-price">$5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Seaweed salad</span><span class="menu-item-price">$7</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spring mix salad</span><span class="menu-item-price">$6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Mango salad</span><span class="menu-item-price">$7</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Avocado salad</span><span class="menu-item-price">$9</span></div>
                     </div>
                 </div>
 
-                <!-- Column 3: Special Rolls -->
-                <div class="reveal-up" style="transition-delay: 0.2s;">
-                    <h3 class="text-2xl font-bold mb-8 border-b-2 border-[#E11D48] pb-2 inline-block">Dragon Series</h3>
-                    <div class="space-y-6">
-                        <div class="flex justify-between items-center group">
-                            <div>
-                                <p class="font-bold">Weko Roll</p>
-                                <span class="badge-red">SIGNATURE</span>
-                            </div>
-                            <span class="font-bold">$15.5</span>
-                        </div>
-                        <div class="flex justify-between items-center group">
-                            <p class="font-bold">Black Dragon</p>
-                            <span class="font-bold">$13.5</span>
-                        </div>
-                        <div class="flex justify-between items-center group">
-                            <p class="font-bold">Rainbow Roll</p>
-                            <span class="font-bold">$11.5</span>
-                        </div>
-                        <div class="flex justify-between items-center group">
-                            <p class="font-bold">Dynamite Roll</p>
-                            <span class="font-bold">$11.5</span>
-                        </div>
-                        <div class="flex justify-between items-center group">
-                            <p class="font-bold">Spider Roll</p>
-                            <span class="font-bold">$12.5</span>
-                        </div>
+                <!-- SUSHI & SASHIMI (Nigiri 2pcs / Sashimi 3pcs) -->
+                <div class="reveal-up">
+                    <h3 class="text-2xl font-bold border-l-4 border-[#E11D48] pl-3 mb-4">Sushi & Sashimi</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="menu-item-row"><span class="menu-item-name">White tuna (Nigiri/Sashimi)</span><span class="menu-item-price">$6 / $6.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Red tuna</span><span class="menu-item-price">$7 / $7.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Mackerel</span><span class="menu-item-price">$5.5 / $6.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Ebi-shrimp</span><span class="menu-item-price">$6 / $6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Red snapper</span><span class="menu-item-price">$6 / $6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Squid</span><span class="menu-item-price">$6 / $7</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Salmon</span><span class="menu-item-price">$6 / $6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Surf clam</span><span class="menu-item-price">$5 / $6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Crab meat</span><span class="menu-item-price">$5 / $6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Unagi (BBQ eel)</span><span class="menu-item-price">$6 / $8</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Octopus</span><span class="menu-item-price">$6 / $6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Egg</span><span class="menu-item-price">$4 / $5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Bean curd (Nigiri only)</span><span class="menu-item-price">$4 / --</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Tobiko (Nigiri only)</span><span class="menu-item-price">$5 / --</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Avocado (Nigiri)</span><span class="menu-item-price">$5 / --</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spicy salmon (Nigiri)</span><span class="menu-item-price">$5 / --</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Salmon rose (Nigiri)</span><span class="menu-item-price">$6 / --</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spicy scallop (Nigiri)</span><span class="menu-item-price">$6 / --</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spicy tuna (Nigiri)</span><span class="menu-item-price">$6 / --</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Salmon tataki (5pcs)</span><span class="menu-item-price">$10</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Red tuna tataki (5pcs)</span><span class="menu-item-price">$10</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Beef tataki (10pcs)</span><span class="menu-item-price">$9</span></div>
+                    </div>
+                </div>
+
+                <!-- MAKI & TEMAKI -->
+                <div class="reveal-up">
+                    <h3 class="text-2xl font-bold border-l-4 border-[#E11D48] pl-3 mb-4">Maki & Temaki</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="menu-item-row"><span class="menu-item-name">Avocado</span><span class="menu-item-price">$6 / $4.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">California</span><span class="menu-item-price">$7 / $5.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Cucumber</span><span class="menu-item-price">$6 / $4.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Crab meat</span><span class="menu-item-price">$6 / $5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Oshinko (pickled radish)</span><span class="menu-item-price">$6 / $4.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Salmon</span><span class="menu-item-price">$7 / $5.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spicy salmon</span><span class="menu-item-price">$7 / $5.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spicy scallop</span><span class="menu-item-price">$7 / $5.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spicy crab meat</span><span class="menu-item-price">$7 / $5.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">White tuna</span><span class="menu-item-price">$7 / $5.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Red tuna</span><span class="menu-item-price">$7.5 / $6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spicy red tuna</span><span class="menu-item-price">$7 / $5.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Unagi (BBQ eel)</span><span class="menu-item-price">$7.5 / $5.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Yam</span><span class="menu-item-price">$7 / $4.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Avocado salmon</span><span class="menu-item-price">$7.5 / $6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Cheese salmon</span><span class="menu-item-price">$7 / $6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Cheese eel</span><span class="menu-item-price">$7 / $6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Cheese strawberry</span><span class="menu-item-price">$7 (maki only)</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Mango salmon</span><span class="menu-item-price">$7 (maki only)</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Rocky roll</span><span class="menu-item-price">$6.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spicy crispy roll</span><span class="menu-item-price">$6.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Crab meat cucumber</span><span class="menu-item-price">$7</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Big hand roll</span><span class="menu-item-price">$7</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Avocado cucumber</span><span class="menu-item-price">$6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Boston roll</span><span class="menu-item-price">$7</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Futo maki</span><span class="menu-item-price">$6</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Philadelphia roll</span><span class="menu-item-price">$8.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Tempura roll</span><span class="menu-item-price">$7.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Chicken teriyaki roll</span><span class="menu-item-price">$8</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Beef teriyaki roll</span><span class="menu-item-price">$9</span></div>
+                    </div>
+                </div>
+
+                <!-- BENTO & BOWLS -->
+                <div class="reveal-up">
+                    <h3 class="text-2xl font-bold border-l-4 border-[#E11D48] pl-3 mb-4">Bento Boxes</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">Chicken teriyaki bento</span><span class="menu-item-price">$21</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Salmon teriyaki bento</span><span class="menu-item-price">$21</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Beef teriyaki bento</span><span class="menu-item-price">$21</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Shrimp teriyaki bento</span><span class="menu-item-price">$22</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Vegetable teriyaki bento</span><span class="menu-item-price">$17</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Beef short ribs bento (6pcs)</span><span class="menu-item-price">$25</span></div>
+                    </div>
+                    <h3 class="text-xl font-bold border-l-4 border-[#E11D48] pl-3 mt-6 mb-3">Bowls</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">Salmon bowl</span><span class="menu-item-price">$16</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Fried chicken bowl</span><span class="menu-item-price">$16</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Crispy shrimp bowl</span><span class="menu-item-price">$16</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Red tuna bowl</span><span class="menu-item-price">$16</span></div>
+                    </div>
+                </div>
+
+                <!-- TACO SUSHI & SUSHI PIZZA -->
+                <div class="reveal-up">
+                    <h3 class="text-2xl font-bold border-l-4 border-[#E11D48] pl-3 mb-4">Taco Sushi</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">Salmon taco</span><span class="menu-item-price">$8</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Tuna taco</span><span class="menu-item-price">$8</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Shrimp tempura taco</span><span class="menu-item-price">$8</span></div>
+                    </div>
+                    <h3 class="text-xl font-bold border-l-4 border-[#E11D48] pl-3 mt-6 mb-3">Sushi Pizza</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">Crab cake pizza</span><span class="menu-item-price">$10</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Avocado pizza</span><span class="menu-item-price">$9</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Eel pizza</span><span class="menu-item-price">$11</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Red tuna pizza</span><span class="menu-item-price">$11</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Salmon pizza</span><span class="menu-item-price">$10</span></div>
+                    </div>
+                </div>
+
+                <!-- PARTY TRAYS -->
+                <div class="reveal-up">
+                    <h3 class="text-2xl font-bold border-l-4 border-[#E11D48] pl-3 mb-4">Party Trays</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">38 pcs party tray</span><span class="menu-item-price">$39.99</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">80 pcs party tray</span><span class="menu-item-price">$69.99</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">120 pcs party tray</span><span class="menu-item-price">$109.99</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">168 pcs party tray</span><span class="menu-item-price">$139.99</span></div>
+                    </div>
+                </div>
+
+                <!-- SPECIAL MAKI (full list) -->
+                <div class="reveal-up md:col-span-2 lg:col-span-3">
+                    <h3 class="text-2xl font-bold border-l-4 border-[#E11D48] pl-3 mb-4">Special Maki (Signature Rolls)</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="menu-item-row"><span class="menu-item-name">Weko roll</span><span class="menu-item-price">$15.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Black dragon</span><span class="menu-item-price">$13.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Green dragon</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Golden dragon</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Red dragon</span><span class="menu-item-price">$14.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Yellow dragon</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Fruit dragon</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Vegetarian dragon</span><span class="menu-item-price">$11.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Soft shell crab roll</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Deep fried white tuna</span><span class="menu-item-price">$9</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Golden California</span><span class="menu-item-price">$11.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Hawaii rice paper roll</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Dynamite roll</span><span class="menu-item-price">$11.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Rainbow roll</span><span class="menu-item-price">$11.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spider roll</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Tuna torched roll</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Salmon torched roll</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Red tuna torched roll</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spicy salmon rice paper roll</span><span class="menu-item-price">$12.5</span></div>
+                    </div>
+                </div>
+
+                <!-- WOK & CURRIES -->
+                <div class="reveal-up">
+                    <h3 class="text-2xl font-bold border-l-4 border-[#E11D48] pl-3 mb-4">Wok (Chicken/Beef/Shrimp)</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="menu-item-row"><span class="menu-item-name">Vegetable</span><span class="menu-item-price">$13.5/$14.5/$15.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Mongolia</span><span class="menu-item-price">$13.5/$14.5/$15.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Broccoli</span><span class="menu-item-price">$13/$14/$15</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Sweet & sour</span><span class="menu-item-price">$12.5/--/$15.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Sesame</span><span class="menu-item-price">$13.5/$15/--</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Lemon (chicken only)</span><span class="menu-item-price">$12.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">General Tso's (chicken only)</span><span class="menu-item-price">$13.5</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Basil</span><span class="menu-item-price">$14/$15/$16</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Lemongrass</span><span class="menu-item-price">$14/$15/--</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Cashew</span><span class="menu-item-price">$15/$16/$17</span></div>
+                    </div>
+                    <h3 class="text-xl font-bold border-l-4 border-[#E11D48] pl-3 mt-6 mb-3">Curry</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">Red curry</span><span class="menu-item-price">$15/$16/$17</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Green curry</span><span class="menu-item-price">$15/$16/$17</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Golden curry</span><span class="menu-item-price">$15/$16/$17</span></div>
+                    </div>
+                </div>
+
+                <!-- SPECIAL COMBINATIONS & LUNCH SPECIALS -->
+                <div class="reveal-up">
+                    <h3 class="text-2xl font-bold border-l-4 border-[#E11D48] pl-3 mb-4">Special Combinations</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="menu-item-row"><span class="menu-item-name">Lemon chicken</span><span class="menu-item-price">$11</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Sweet & sour chicken</span><span class="menu-item-price">$11</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Chicken balls</span><span class="menu-item-price">$11</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Beef with green pepper</span><span class="menu-item-price">$13</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Chicken chow mein</span><span class="menu-item-price">$12</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Beef with broccoli</span><span class="menu-item-price">$15</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">General Tso's + chicken balls</span><span class="menu-item-price">$15</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Beef green pepper + sweet & sour chicken</span><span class="menu-item-price">$15</span></div>
+                    </div>
+                    <h3 class="text-xl font-bold border-l-4 border-[#E11D48] pl-3 mt-6 mb-3">Lunch Specials (Kitchen)</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">General Tso's chicken</span><span class="menu-item-price">$10</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Red/green curry (chicken/beef/shrimp/veg)</span><span class="menu-item-price">$11/$12/$12/$10</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Sweet & sour chicken</span><span class="menu-item-price">$10</span></div>
+                    </div>
+                    <h3 class="text-xl font-bold border-l-4 border-[#E11D48] pl-3 mt-6 mb-3">Lunch Sushi Bar</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">California roll (8pcs)</span><span class="menu-item-price">$12</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Boston roll (8pcs)</span><span class="menu-item-price">$12</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Yam tempura roll (8pcs)</span><span class="menu-item-price">$12</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Spicy salmon roll (8pcs)</span><span class="menu-item-price">$12</span></div>
+                    </div>
+                    <h3 class="text-xl font-bold border-l-4 border-[#E11D48] pl-3 mt-6 mb-3">Lunch Bento</h3>
+                    <div class="space-y-2">
+                        <div class="menu-item-row"><span class="menu-item-name">Chicken/beef/shrimp/salmon/veg teriyaki</span><span class="menu-item-price">$21/$21/$22/$21/$17</span></div>
+                        <div class="menu-item-row"><span class="menu-item-name">Beef short ribs bento</span><span class="menu-item-price">$25</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing / AYCE Footer -->
+    <!-- AYCE Pricing Section -->
     <section class="py-24 px-8 bg-[#202020] border-t border-white/5" id="ayce">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
             <div class="text-center md:text-left">
-                <h2 class="text-5xl font-black mb-4 uppercase tracking-tighter">The Full <span class="text-[#E11D48]">Experience</span></h2>
-                <p class="text-gray-400 max-w-md">Our All-You-Can-Eat menu offers the highest quality ingredients in the region. Come hungry, leave legendary.</p>
+                <h2 class="text-5xl font-black mb-4 uppercase tracking-tighter">All‑You‑Can‑Eat <span class="text-[#E11D48]">Experience</span></h2>
+                <p class="text-gray-400 max-w-md">Endless fresh sushi, sashimi, and hot dishes. Come hungry, leave legendary.</p>
             </div>
-            <div class="grid grid-cols-2 gap-4 w-full md:w-auto">
+            <div class="grid grid-cols-2 gap-6 w-full md:w-auto">
                 <div class="glass-card p-6 text-center border-b-4 border-[#E11D48]">
-                    <h4 class="text-xs tracking-widest uppercase text-gray-400 mb-2">Weekend Surcharge</h4>
-                    <p class="text-3xl font-black">+$2.00</p>
+                    <h4 class="text-xs tracking-widest uppercase text-gray-400 mb-2">Adult Lunch</h4>
+                    <p class="text-3xl font-black">$26.99</p>
+                    <p class="text-xs mt-2">+$2 Fri–weekends/holidays</p>
                 </div>
                 <div class="glass-card p-6 text-center border-b-4 border-[#E11D48]">
-                    <h4 class="text-xs tracking-widest uppercase text-gray-400 mb-2">Kids (4 & Under)</h4>
-                    <p class="text-3xl font-black">From $2</p>
+                    <h4 class="text-xs tracking-widest uppercase text-gray-400 mb-2">Adult Dinner</h4>
+                    <p class="text-3xl font-black">$36.99</p>
+                    <p class="text-xs mt-2">+$2 Fri–weekends/holidays</p>
+                </div>
+                <div class="glass-card p-6 text-center">
+                    <h4 class="text-xs tracking-widest uppercase text-gray-400 mb-2">Seniors</h4>
+                    <p class="text-xl font-black">Lunch $25.99 / Dinner $35.99</p>
+                </div>
+                <div class="glass-card p-6 text-center">
+                    <h4 class="text-xs tracking-widest uppercase text-gray-400 mb-2">Kids (4–10)</h4>
+                    <p class="text-xl font-black">Lunch $13.50 / Dinner $18.50</p>
+                    <p class="text-xs">+$1 weekends/holidays</p>
+                </div>
+                <div class="glass-card p-6 text-center col-span-2">
+                    <h4 class="text-xs tracking-widest uppercase text-gray-400 mb-2">4 & Under</h4>
+                    <p class="text-xl font-black">Lunch $2 / Dinner $4</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Location / Footer -->
+    <!-- Footer -->
     <footer class="py-20 px-8 bg-black text-white" id="contact">
         <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12">
             <div class="md:col-span-2">
                 <img src="https://img1.wsimg.com/isteam/ip/b4fd9c7f-4fc0-4a97-8437-fa6b26eaa4de/blob-c91ff4b.png" alt="Weko" class="h-16 w-auto mb-6 brightness-0 invert">
-                <p class="text-4xl font-black tracking-tighter leading-none mb-6">3521 Portage Road,<br>Niagara Falls</p>
+                <p class="text-4xl font-black tracking-tighter leading-none mb-6">3521 Portage Road,<br>Niagara Falls, ON</p>
                 <p class="text-[#E11D48] text-2xl font-bold tracking-widest">(905) 357-4600</p>
             </div>
             <div>
@@ -458,73 +602,35 @@
             </div>
         </div>
         <div class="pt-12 text-center text-xs text-gray-600 tracking-widest uppercase">
-            &copy; 2024 Weko Sushi. Handcrafted in Niagara Falls.
+            © 2025 Weko Sushi. Handcrafted in Niagara Falls.
         </div>
     </footer>
-
-    <a href="https://kuse.ai" class="kuse-branding">
-        <span>made with</span>
-        <svg viewBox="0,0,160,44" xmlns="http://www.w3.org/2000/svg"><path d="m.01,20.65C-.43,8.25,9.3-2.03,22.04.34,34.78,2.72,43.29,8.32,43.29,22.9s-8.66,19.01-22.03,20.3C7.9,44.5.46,33.05.01,20.65z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="m146.76,7.94c8.07,0,13.24,6.15,13.24,14.58v1.39h-20.75c.45,4.05,3.51,7.37,8.57,7.37,2.62,0,5.73-1.05,7.62-2.94l2.67,3.83c-2.67,2.55-6.62,3.88-10.9,3.88-8.07,0-14.08-5.6-14.08-14.08,0-7.76,5.67-14.02,13.63-14.02zm0,4.77c-5.01,0-7.29,3.83-7.57,7.1h15.13c-.11-3.16-2.28-7.1-7.57-7.1z" fill="currentColor"/><path d="m86.64,24.49c0,4.15,2.39,6.84,6.84,6.84,4.4,0,6.84-2.69,6.84-6.84V8.55h5.37v16.33c0,6.7-4.06,11.14-12.21,11.14-8.21,0-12.21-4.5-12.21-11.09V8.55h5.37v15.94zm32.99-16.55c4.49,0,8.06,1.47,10.6,3.86l-2.59,3.81c-2.05-2-5.28-3.08-8.06-3.08-2.88,0-4.84,1.37-4.84,3.32,0,1.91,2.64,2.54,5.81,3.27,4.59,1.08,10.26,2.4,10.26,8.46,0,4.94-3.76,8.41-11.14,8.41-4.98,0-8.94-1.76-11.24-4.11l2.54-4.11c1.86,1.91,5.18,3.67,8.84,3.67,3.91,0,5.57-1.66,5.57-3.62,0-2.3-2.88-2.98-6.21-3.76-4.54-1.08-9.87-2.3-9.87-8.06,0-4.5,4.2-8.06,10.31-8.06zM60.79,20.82,71.44,8.55h6.5L66.46,21.26,78.82,35.44h-6.5l-9.28-11.1-2.25,2.49v8.6h-5.33V8.55h5.33v12.27z" fill="currentColor"/></svg>
-    </a>
 
     <script>
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-        // Custom Cursor Logic
-        const cursor = document.getElementById(`custom-cursor`);
-        document.addEventListener(`mousemove`, (e) => {
-            gsap.to(cursor, {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.1,
-                ease: `power2.out`
-            });
+        // Custom Cursor
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1, ease: 'power2.out' });
+        });
+        document.querySelectorAll('a, button, .btn-magnetic').forEach(el => {
+            el.addEventListener('mouseenter', () => gsap.to(cursor, { scale: 3, opacity: 0.3 }));
+            el.addEventListener('mouseleave', () => gsap.to(cursor, { scale: 1, opacity: 1 }));
         });
 
-        document.querySelectorAll(`a, button, .btn-magnetic`).forEach(el => {
-            el.addEventListener(`mouseenter`, () => {
-                gsap.to(cursor, { scale: 3, opacity: 0.3 });
-            });
-            el.addEventListener(`mouseleave`, () => {
-                gsap.to(cursor, { scale: 1, opacity: 1 });
-            });
-        });
-
-        // Ink Fluid Simulation (Abstract Logic)
-        const canvas = document.getElementById(`ink-canvas`);
-        const ctx = canvas.getContext(`2d`);
+        // Ink effect
+        const canvas = document.getElementById('ink-canvas');
+        const ctx = canvas.getContext('2d');
         let particles = [];
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener(`resize`, resize);
-        resize();
-
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
         class InkDrop {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.size = Math.random() * 40 + 20;
-                this.opacity = 0.5;
-                this.vx = (Math.random() - 0.5) * 2;
-                this.vy = (Math.random() - 0.5) * 2;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.opacity -= 0.005;
-                this.size += 0.5;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(0, 0, 0, ${this.opacity})`;
-                ctx.fill();
-            }
+            constructor(x, y) { this.x = x; this.y = y; this.size = Math.random() * 40 + 20; this.opacity = 0.5; this.vx = (Math.random() - 0.5) * 2; this.vy = (Math.random() - 0.5) * 2; }
+            update() { this.x += this.vx; this.y += this.vy; this.opacity -= 0.005; this.size += 0.5; }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = `rgba(0, 0, 0, ${this.opacity})`; ctx.fill(); }
         }
-
         function animateInk() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             if (Math.random() > 0.95) particles.push(new InkDrop(Math.random() * canvas.width, Math.random() * canvas.height));
@@ -534,73 +640,56 @@
         }
         animateInk();
 
-        // Magnetic Button Effect
-        document.querySelectorAll(`.btn-magnetic`).forEach(btn => {
-            btn.addEventListener(`mousemove`, (e) => {
+        // Magnetic buttons
+        document.querySelectorAll('.btn-magnetic').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
                 const rect = btn.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
-                gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: `power2.out` });
+                gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: 'power2.out' });
             });
-            btn.addEventListener(`mouseleave`, () => {
-                gsap.to(btn, { x: 0, y: 0, duration: 0.3, ease: `elastic.out(1, 0.3)` });
+            btn.addEventListener('mouseleave', () => gsap.to(btn, { x: 0, y: 0, duration: 0.3, ease: 'elastic.out(1,0.3)' }));
+        });
+
+        // Hero animations
+        gsap.timeline()
+            .to('#hero-title', { opacity: 1, y: 0, duration: 1.5, ease: 'expo.out' })
+            .to('#hero-motto', { opacity: 1, y: 0, duration: 1 }, '-=1')
+            .to('#hero-cta', { opacity: 1, y: 0, duration: 1 }, '-=0.8');
+
+        // Parallax
+        gsap.to('.hero-main', {
+            scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom top', scrub: true },
+            y: '30%', scale: 1.2
+        });
+
+        // Horizontal scroll
+        const horizontalContainer = document.querySelector('.horizontal-scroll-container');
+        if (horizontalContainer) {
+            gsap.to(horizontalContainer, {
+                x: () => -(horizontalContainer.scrollWidth - window.innerWidth),
+                ease: 'none',
+                scrollTrigger: { trigger: '.horizontal-scroll-section', pin: true, scrub: 1, end: () => `+=${horizontalContainer.scrollWidth}` }
             });
-        });
+        }
 
-        // Hero Animations
-        const tlHero = gsap.timeline();
-        tlHero.to(`#hero-title`, { opacity: 1, y: 0, duration: 1.5, ease: `expo.out` })
-              .to(`#hero-motto`, { opacity: 1, y: 0, duration: 1 }, `-=1`)
-              .to(`#hero-cta`, { opacity: 1, y: 0, duration: 1 }, `-=0.8`);
-
-        // Parallax Effect
-        gsap.to(`.hero-main`, {
-            scrollTrigger: {
-                trigger: `body`,
-                start: `top top`,
-                end: `bottom top`,
-                scrub: true
-            },
-            y: `30%`,
-            scale: 1.2
-        });
-
-        // Horizontal Scroll
-        const horizontalContainer = document.querySelector(`.horizontal-scroll-container`);
-        gsap.to(horizontalContainer, {
-            x: () => -(horizontalContainer.scrollWidth - window.innerWidth),
-            ease: `none`,
-            scrollTrigger: {
-                trigger: `.horizontal-scroll-section`,
-                pin: true,
-                scrub: 1,
-                end: () => `+=${horizontalContainer.scrollWidth}`
-            }
-        });
-
-        // Reveal Animations
-        document.querySelectorAll(`.reveal-up`).forEach(el => {
+        // Reveal animations
+        document.querySelectorAll('.reveal-up').forEach(el => {
             gsap.from(el, {
-                scrollTrigger: {
-                    trigger: el,
-                    start: `top 85%`
-                },
-                y: 100,
-                opacity: 0,
-                duration: 1.2,
-                ease: `power4.out`
+                scrollTrigger: { trigger: el, start: 'top 85%' },
+                y: 100, opacity: 0, duration: 1.2, ease: 'power4.out'
             });
         });
 
-        // Katana Slash on Section Changes
+        // Katana slash on menu view
         ScrollTrigger.create({
-            trigger: `#menu`,
-            start: `top center`,
+            trigger: '#full-menu',
+            start: 'top center',
             onEnter: () => {
                 gsap.timeline()
-                    .set(`.slash-overlay`, { clipPath: `polygon(0 0, 0 0, 0 100%, 0% 100%)` })
-                    .to(`.slash-overlay`, { clipPath: `polygon(0 0, 100% 0, 100% 100%, 0% 100%)`, duration: 0.4, ease: `power4.inOut` })
-                    .to(`.slash-overlay`, { clipPath: `polygon(100% 0, 100% 0, 100% 100%, 100% 100%)`, duration: 0.4, ease: `power4.inOut` });
+                    .set('.slash-overlay', { clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)' })
+                    .to('.slash-overlay', { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)', duration: 0.4, ease: 'power4.inOut' })
+                    .to('.slash-overlay', { clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)', duration: 0.4, ease: 'power4.inOut' });
             }
         });
     </script>
