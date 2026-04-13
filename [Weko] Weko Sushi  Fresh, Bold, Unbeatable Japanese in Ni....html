@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weko Sushi | Fresh, Bold, Unbeatable Japanese in Niagara Falls</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <style>
+        :root {
+            --primary-red: #E11D48;
+            --sumi-black: #202020;
+            --glass-white: rgba(255, 255, 255, 0.08);
+            --border-light: rgba(33, 33, 33, 0.08);
+            --border-dark: rgba(255, 255, 255, 0.12);
+        }
+
+        body {
+            background-color: var(--sumi-black);
+            color: white;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .font-poppins { font-family: `Poppins`, sans-serif; }
+
+        /* Custom Cursor */
+        #custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.15s ease-out;
+        }
+
+        /* Ink Canvas */
+        #ink-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+        }
+
+        /* Film Grain */
+        .film-grain {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url(`https://www.transparenttextures.com/patterns/stardust.png`);
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* Katana Slash Transition */
+        .slash-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--primary-red);
+            clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+            z-index: 10000;
+            pointer-events: none;
+        }
+
+        /* Parallax Hero */
+        .hero-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            will-change: transform;
+        }
+
+        .hero-main {
+            background-image: linear-gradient(to bottom, rgba(32,32,32,0.4), var(--sumi-black)), url(`https://img1.wsimg.com/isteam/ip/b4fd9c7f-4fc0-4a97-8437-fa6b26eaa4de/DSC04031.jpg`);
+            z-index: 2;
+        }
+
+        /* Horizontal Scroll Gallery */
+        .horizontal-scroll-container {
+            display: flex;
+            width: 300%;
+            height: 100vh;
+            will-change: transform;
+        }
+
+        .scroll-item {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem;
+            position: relative;
+        }
+
+        /* UI Components */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+        }
+
+        .btn-magnetic {
+            background: var(--primary-red);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            transition: background 0.3s ease;
+        }
+
+        .btn-magnetic:hover {
+            background: #be123c;
+        }
+
+        .kinetic-text {
+            display: inline-block;
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 0.9;
+        }
+
+        .kuse-branding {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 0.8rem;
+            text-decoration: none;
+            z-index: 10001;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            background: rgba(32, 32, 32, 0.6);
+            padding: 8px 12px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+        }
+
+        .kuse-branding:hover {
+            opacity: 1;
+            color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        .kuse-branding svg {
+            height: 1.2em;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .badge-red {
+            background: var(--primary-red);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--sumi-black); }
+        ::-webkit-scrollbar-thumb { background: var(--primary-red); border-radius: 10px; }
+    </style>
+</head>
+<body class="font-poppins">
+
+    <div id="custom-cursor"></div>
+    <div class="film-grain"></div>
+    <canvas id="ink-canvas"></canvas>
+    <div class="slash-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-[100] mix-blend-difference">
+        <div class="flex items-center gap-4">
+            <img src="https://img1.wsimg.com/isteam/ip/b4fd9c7f-4fc0-4a97-8437-fa6b26eaa4de/blob-c91ff4b.png" alt="Weko Logo" class="h-12 w-auto brightness-0 invert">
+            <span class="text-2xl font-black tracking-tighter text-white">WEKO</span>
+        </div>
+        <div class="hidden md:flex gap-10 text-sm font-medium tracking-widest text-white uppercase">
+            <a href="#about" class="hover:text-red-500 transition-colors">History</a>
+            <a href="#menu" class="hover:text-red-500 transition-colors">Masterpieces</a>
+            <a href="#ayce" class="hover:text-red-500 transition-colors">AYCE</a>
+            <a href="#contact" class="hover:text-red-500 transition-colors">Contact</a>
+        </div>
+        <div class="btn-magnetic">RESERVE NOW</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="hero-layer hero-main"></div>
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-7xl md:text-9xl font-black tracking-tighter leading-none kinetic-text opacity-0" id="hero-title">
+                BOLD<br><span class="text-[#E11D48]">FRESH</span><br>UNBEATABLE
+            </h1>
+            <p class="mt-8 text-xl md:text-2xl font-light tracking-widest uppercase opacity-0" id="hero-motto">
+                Discover the delights of Japanese cuisine at Weko
+            </p>
+            <div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-6 opacity-0" id="hero-cta">
+                <div class="flex items-center gap-2 glass-card px-6 py-3">
+                    <span class="text-yellow-400 text-xl">★★★★★</span>
+                    <span class="font-bold">4.6</span>
+                    <span class="text-gray-400 text-sm">(242 Reviews)</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm uppercase tracking-widest">
+                    <span class="w-12 h-[1px] bg-red-500"></span>
+                    Niagara Falls' Local Treasure
+                    <span class="w-12 h-[1px] bg-red-500"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro Text / Samurai Modern Ethos -->
+    <section class="py-32 px-8 md:px-24 bg-white text-[#202020]" id="about">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-center">
+            <div class="reveal-up">
+                <h2 class="text-5xl md:text-7xl font-black uppercase leading-none tracking-tighter mb-8">
+                    Not Just Another <span class="text-[#E11D48]">Sushi Spot.</span>
+                </h2>
+                <p class="text-xl leading-relaxed text-gray-600 mb-8">
+                    "肉比米饭多，本地人的宝藏店！" (More meat than rice, a local treasure!) — Weko is the Niagara Falls favourite that redefines value and quality. We're the destination that beats the corporate chains with authentic craft and bold flavors.
+                </p>
+                <div class="flex gap-4">
+                    <div class="p-4 border-l-4 border-[#E11D48] bg-gray-50">
+                        <p class="font-bold text-2xl">$26.99</p>
+                        <p class="text-xs uppercase tracking-widest">Lunch AYCE</p>
+                    </div>
+                    <div class="p-4 border-l-4 border-[#E11D48] bg-gray-50">
+                        <p class="font-bold text-2xl">$36.99</p>
+                        <p class="text-xs uppercase tracking-widest">Dinner AYCE</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative reveal-up">
+                <img src="https://tb-static.uber.com/prod/image-proc/processed_images/02ceb805b6697a8a98e89e8ed792d3e2/c4114ef7f0cc2f8ee04dbb216969493e.webp" 
+                     alt="Weko Atmosphere" 
+                     class="rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-[#E11D48] rounded-full flex items-center justify-center text-white text-center p-6 transform rotate-12">
+                    <p class="font-black text-lg">BEST IN NIAGARA FALLS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horizontal Masterpieces -->
+    <section class="horizontal-scroll-section overflow-hidden bg-[#202020]">
+        <div class="horizontal-scroll-container">
+            <!-- Item 1 -->
+            <div class="scroll-item">
+                <div class="grid md:grid-cols-2 gap-12 items-center w-full max-w-7xl">
+                    <img src="https://img1.wsimg.com/isteam/ip/b4fd9c7f-4fc0-4a97-8437-fa6b26eaa4de/DSC04031.jpg" class="rounded-2xl h-[60vh] object-cover" alt="Signature Weko Roll">
+                    <div>
+                        <span class="text-[#E11D48] font-bold tracking-[0.5em] uppercase">Signature Masterpiece</span>
+                        <h3 class="text-6xl font-black mt-4 mb-6">THE WEKO ROLL</h3>
+                        <p class="text-gray-400 text-lg mb-8">Deep fried soft shell crab, avocado, cucumber, topped with tobiko & fried shredded potatoes. The ultimate texture symphony.</p>
+                        <p class="text-4xl font-bold text-white">$15.50</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="scroll-item">
+                <div class="grid md:grid-cols-2 gap-12 items-center w-full max-w-7xl">
+                    <div>
+                        <span class="text-[#E11D48] font-bold tracking-[0.5em] uppercase">Ocean Fresh</span>
+                        <h3 class="text-6xl font-black mt-4 mb-6">DRAGON SERIES</h3>
+                        <p class="text-gray-400 text-lg mb-8">From the Black Dragon with BBQ Eel to the Golden Dragon with Salmon. Fresh, thick cuts that define our "Local Treasure" reputation.</p>
+                        <div class="flex gap-4 flex-wrap">
+                            <span class="glass-card px-4 py-2">Black Dragon $13.5</span>
+                            <span class="glass-card px-4 py-2">Red Dragon $14.5</span>
+                            <span class="glass-card px-4 py-2">Green Dragon $12.5</span>
+                        </div>
+                    </div>
+                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=3819379298391966" class="rounded-2xl h-[60vh] object-cover" alt="Weko Dragon Rolls">
+                </div>
+            </div>
+            <!-- Item 3 -->
+            <div class="scroll-item bg-[#E11D48]">
+                <div class="text-center">
+                    <h3 class="text-8xl md:text-9xl font-black tracking-tighter mb-8">TASTE THE<br>DIFFERENCE</h3>
+                    <p class="text-2xl font-light uppercase tracking-[0.2em] mb-12 text-white/80">Clean, Fair Price, Amazing Staff.</p>
+                    <div class="btn-magnetic bg-white !text-[#E11D48] text-2xl py-6 px-12">VIEW FULL MENU</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="py-32 px-8 bg-white text-[#202020]" id="menu">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-end mb-16 reveal-up">
+                <div>
+                    <h2 class="text-6xl font-black uppercase tracking-tighter">The <span class="text-[#E11D48]">Vault</span></h2>
+                    <p class="text-gray-500 font-medium uppercase tracking-widest mt-2">Curated selections for the bold</p>
+                </div>
+                <div class="hidden md:block h-[1px] flex-1 mx-12 bg-gray-200"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-16">
+                <!-- Column 1: Starters -->
+                <div class="reveal-up">
+                    <h3 class="text-2xl font-bold mb-8 border-b-2 border-[#E11D48] pb-2 inline-block">Appetizers</h3>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center group">
+                            <div>
+                                <p class="font-bold group-hover:text-[#E11D48] transition-colors">Beef Short Ribs (8pcs)</p>
+                                <p class="text-xs text-gray-400 uppercase">Grilled to perfection</p>
+                            </div>
+                            <span class="font-bold">$15</span>
+                        </div>
+                        <div class="flex justify-between items-center group">
+                            <div>
+                                <p class="font-bold group-hover:text-[#E11D48] transition-colors">Rock Shrimp</p>
+                                <p class="text-xs text-gray-400 uppercase">Crispy, spicy glaze</p>
+                            </div>
+                            <span class="font-bold">$15</span>
+                        </div>
+                        <div class="flex justify-between items-center group">
+                            <div>
+                                <p class="font-bold group-hover:text-[#E11D48] transition-colors">Soft Shell Crab</p>
+                                <p class="text-xs text-gray-400 uppercase">Signature deep fry</p>
+                            </div>
+                            <span class="font-bold">$14</span>
+                        </div>
+                        <div class="flex justify-between items-center group">
+                            <div>
+                                <p class="font-bold group-hover:text-[#E11D48] transition-colors">Salmon Teriyaki</p>
+                                <p class="text-xs text-gray-400 uppercase">Fresh Atlantic Salmon</p>
+                            </div>
+                            <span class="font-bold">$13</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Sushi & Sashimi -->
+                <div class="reveal-up" style="transition-delay: 0.1s;">
+                    <h3 class="text-2xl font-bold mb-8 border-b-2 border-[#E11D48] pb-2 inline-block">Nigiri & Sashimi</h3>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center">
+                            <p class="font-bold">Salmon (N/S)</p>
+                            <span class="font-bold text-[#E11D48]">$6 / $6</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="font-bold">Red Tuna (N/S)</p>
+                            <span class="font-bold text-[#E11D48]">$7 / $7.5</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="font-bold">White Tuna (N/S)</p>
+                            <span class="font-bold text-[#E11D48]">$6 / $6.5</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="font-bold">Unagi (N/S)</p>
+                            <span class="font-bold text-[#E11D48]">$6 / $8</span>
+                        </div>
+                        <div class="mt-8 p-6 bg-gray-900 text-white rounded-xl">
+                            <p class="text-xs tracking-widest uppercase mb-2">Freshness Guarantee</p>
+                            <p class="text-sm italic">All Sashimi is 3pcs, Nigiri 2pcs per order.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Special Rolls -->
+                <div class="reveal-up" style="transition-delay: 0.2s;">
+                    <h3 class="text-2xl font-bold mb-8 border-b-2 border-[#E11D48] pb-2 inline-block">Dragon Series</h3>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center group">
+                            <div>
+                                <p class="font-bold">Weko Roll</p>
+                                <span class="badge-red">SIGNATURE</span>
+                            </div>
+                            <span class="font-bold">$15.5</span>
+                        </div>
+                        <div class="flex justify-between items-center group">
+                            <p class="font-bold">Black Dragon</p>
+                            <span class="font-bold">$13.5</span>
+                        </div>
+                        <div class="flex justify-between items-center group">
+                            <p class="font-bold">Rainbow Roll</p>
+                            <span class="font-bold">$11.5</span>
+                        </div>
+                        <div class="flex justify-between items-center group">
+                            <p class="font-bold">Dynamite Roll</p>
+                            <span class="font-bold">$11.5</span>
+                        </div>
+                        <div class="flex justify-between items-center group">
+                            <p class="font-bold">Spider Roll</p>
+                            <span class="font-bold">$12.5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / AYCE Footer -->
+    <section class="py-24 px-8 bg-[#202020] border-t border-white/5" id="ayce">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="text-center md:text-left">
+                <h2 class="text-5xl font-black mb-4 uppercase tracking-tighter">The Full <span class="text-[#E11D48]">Experience</span></h2>
+                <p class="text-gray-400 max-w-md">Our All-You-Can-Eat menu offers the highest quality ingredients in the region. Come hungry, leave legendary.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-4 w-full md:w-auto">
+                <div class="glass-card p-6 text-center border-b-4 border-[#E11D48]">
+                    <h4 class="text-xs tracking-widest uppercase text-gray-400 mb-2">Weekend Surcharge</h4>
+                    <p class="text-3xl font-black">+$2.00</p>
+                </div>
+                <div class="glass-card p-6 text-center border-b-4 border-[#E11D48]">
+                    <h4 class="text-xs tracking-widest uppercase text-gray-400 mb-2">Kids (4 & Under)</h4>
+                    <p class="text-3xl font-black">From $2</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location / Footer -->
+    <footer class="py-20 px-8 bg-black text-white" id="contact">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12">
+            <div class="md:col-span-2">
+                <img src="https://img1.wsimg.com/isteam/ip/b4fd9c7f-4fc0-4a97-8437-fa6b26eaa4de/blob-c91ff4b.png" alt="Weko" class="h-16 w-auto mb-6 brightness-0 invert">
+                <p class="text-4xl font-black tracking-tighter leading-none mb-6">3521 Portage Road,<br>Niagara Falls</p>
+                <p class="text-[#E11D48] text-2xl font-bold tracking-widest">(905) 357-4600</p>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest mb-6">Hours</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li>Mon - Thu: 11:30 AM - 10:00 PM</li>
+                    <li>Fri - Sat: 11:30 AM - 11:00 PM</li>
+                    <li>Sun: 12:00 PM - 10:00 PM</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest mb-6">Social</h4>
+                <div class="flex gap-4">
+                    <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-white hover:text-black transition-all">FB</a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-white hover:text-black transition-all">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="pt-12 text-center text-xs text-gray-600 tracking-widest uppercase">
+            &copy; 2024 Weko Sushi. Handcrafted in Niagara Falls.
+        </div>
+    </footer>
+
+    <a href="https://kuse.ai" class="kuse-branding">
+        <span>made with</span>
+        <svg viewBox="0,0,160,44" xmlns="http://www.w3.org/2000/svg"><path d="m.01,20.65C-.43,8.25,9.3-2.03,22.04.34,34.78,2.72,43.29,8.32,43.29,22.9s-8.66,19.01-22.03,20.3C7.9,44.5.46,33.05.01,20.65z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="m146.76,7.94c8.07,0,13.24,6.15,13.24,14.58v1.39h-20.75c.45,4.05,3.51,7.37,8.57,7.37,2.62,0,5.73-1.05,7.62-2.94l2.67,3.83c-2.67,2.55-6.62,3.88-10.9,3.88-8.07,0-14.08-5.6-14.08-14.08,0-7.76,5.67-14.02,13.63-14.02zm0,4.77c-5.01,0-7.29,3.83-7.57,7.1h15.13c-.11-3.16-2.28-7.1-7.57-7.1z" fill="currentColor"/><path d="m86.64,24.49c0,4.15,2.39,6.84,6.84,6.84,4.4,0,6.84-2.69,6.84-6.84V8.55h5.37v16.33c0,6.7-4.06,11.14-12.21,11.14-8.21,0-12.21-4.5-12.21-11.09V8.55h5.37v15.94zm32.99-16.55c4.49,0,8.06,1.47,10.6,3.86l-2.59,3.81c-2.05-2-5.28-3.08-8.06-3.08-2.88,0-4.84,1.37-4.84,3.32,0,1.91,2.64,2.54,5.81,3.27,4.59,1.08,10.26,2.4,10.26,8.46,0,4.94-3.76,8.41-11.14,8.41-4.98,0-8.94-1.76-11.24-4.11l2.54-4.11c1.86,1.91,5.18,3.67,8.84,3.67,3.91,0,5.57-1.66,5.57-3.62,0-2.3-2.88-2.98-6.21-3.76-4.54-1.08-9.87-2.3-9.87-8.06,0-4.5,4.2-8.06,10.31-8.06zM60.79,20.82,71.44,8.55h6.5L66.46,21.26,78.82,35.44h-6.5l-9.28-11.1-2.25,2.49v8.6h-5.33V8.55h5.33v12.27z" fill="currentColor"/></svg>
+    </a>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+        // Custom Cursor Logic
+        const cursor = document.getElementById(`custom-cursor`);
+        document.addEventListener(`mousemove`, (e) => {
+            gsap.to(cursor, {
+                x: e.clientX,
+                y: e.clientY,
+                duration: 0.1,
+                ease: `power2.out`
+            });
+        });
+
+        document.querySelectorAll(`a, button, .btn-magnetic`).forEach(el => {
+            el.addEventListener(`mouseenter`, () => {
+                gsap.to(cursor, { scale: 3, opacity: 0.3 });
+            });
+            el.addEventListener(`mouseleave`, () => {
+                gsap.to(cursor, { scale: 1, opacity: 1 });
+            });
+        });
+
+        // Ink Fluid Simulation (Abstract Logic)
+        const canvas = document.getElementById(`ink-canvas`);
+        const ctx = canvas.getContext(`2d`);
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener(`resize`, resize);
+        resize();
+
+        class InkDrop {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 40 + 20;
+                this.opacity = 0.5;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.opacity -= 0.005;
+                this.size += 0.5;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 0, 0, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        function animateInk() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (Math.random() > 0.95) particles.push(new InkDrop(Math.random() * canvas.width, Math.random() * canvas.height));
+            particles = particles.filter(p => p.opacity > 0);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateInk);
+        }
+        animateInk();
+
+        // Magnetic Button Effect
+        document.querySelectorAll(`.btn-magnetic`).forEach(btn => {
+            btn.addEventListener(`mousemove`, (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(btn, { x: x * 0.3, y: y * 0.3, duration: 0.3, ease: `power2.out` });
+            });
+            btn.addEventListener(`mouseleave`, () => {
+                gsap.to(btn, { x: 0, y: 0, duration: 0.3, ease: `elastic.out(1, 0.3)` });
+            });
+        });
+
+        // Hero Animations
+        const tlHero = gsap.timeline();
+        tlHero.to(`#hero-title`, { opacity: 1, y: 0, duration: 1.5, ease: `expo.out` })
+              .to(`#hero-motto`, { opacity: 1, y: 0, duration: 1 }, `-=1`)
+              .to(`#hero-cta`, { opacity: 1, y: 0, duration: 1 }, `-=0.8`);
+
+        // Parallax Effect
+        gsap.to(`.hero-main`, {
+            scrollTrigger: {
+                trigger: `body`,
+                start: `top top`,
+                end: `bottom top`,
+                scrub: true
+            },
+            y: `30%`,
+            scale: 1.2
+        });
+
+        // Horizontal Scroll
+        const horizontalContainer = document.querySelector(`.horizontal-scroll-container`);
+        gsap.to(horizontalContainer, {
+            x: () => -(horizontalContainer.scrollWidth - window.innerWidth),
+            ease: `none`,
+            scrollTrigger: {
+                trigger: `.horizontal-scroll-section`,
+                pin: true,
+                scrub: 1,
+                end: () => `+=${horizontalContainer.scrollWidth}`
+            }
+        });
+
+        // Reveal Animations
+        document.querySelectorAll(`.reveal-up`).forEach(el => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: `top 85%`
+                },
+                y: 100,
+                opacity: 0,
+                duration: 1.2,
+                ease: `power4.out`
+            });
+        });
+
+        // Katana Slash on Section Changes
+        ScrollTrigger.create({
+            trigger: `#menu`,
+            start: `top center`,
+            onEnter: () => {
+                gsap.timeline()
+                    .set(`.slash-overlay`, { clipPath: `polygon(0 0, 0 0, 0 100%, 0% 100%)` })
+                    .to(`.slash-overlay`, { clipPath: `polygon(0 0, 100% 0, 100% 100%, 0% 100%)`, duration: 0.4, ease: `power4.inOut` })
+                    .to(`.slash-overlay`, { clipPath: `polygon(100% 0, 100% 0, 100% 100%, 100% 100%)`, duration: 0.4, ease: `power4.inOut` });
+            }
+        });
+    </script>
+    <script src="https://cdn.kuse.ai/sdk.prd.js"></script>
+</body>
+</html>
